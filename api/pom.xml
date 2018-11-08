@@ -30,6 +30,7 @@
                     <encoding>UTF8</encoding>
                     <includes>
                         <include>**/service/*</include>
+                        <include>**/entity/User.java</include>
                     </includes>
                 </configuration>
             </plugin>

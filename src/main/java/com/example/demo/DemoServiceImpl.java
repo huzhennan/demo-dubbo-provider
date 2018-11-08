@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.entity.User;
 import com.example.demo.service.DemoService;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +13,10 @@ public class DemoServiceImpl implements DemoService {
         System.out.println("-------------------------");
 
         return String.format("hello %s!", name);
+    }
+
+    @Override
+    public User whoAreYou() {
+        return new User("Tom", 8);
     }
 }

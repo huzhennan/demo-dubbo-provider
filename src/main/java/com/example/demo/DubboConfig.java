@@ -6,11 +6,19 @@ import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.ServiceConfig;
 import com.example.demo.service.DemoService;
 import com.example.demo.service.FooService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DubboConfig {
+    @Value("${dubbo.registry.address}")
+    private String registryAddress;
+    @Value("${dubbo.protocol.name:dubbo}")
+    private String protocolName;
+    @Value("${dubbo.protocol.port:12345}")
+    private Integer protocolPort;
+
 
     @Bean
     public ApplicationConfig dubboApplicationConfig() {
@@ -23,7 +31,7 @@ public class DubboConfig {
     @Bean
     public RegistryConfig dubboRegistryConfig() {
         RegistryConfig registryConfig = new RegistryConfig();
-        registryConfig.setAddress("zookeeper://localhost:2181?client=zkclient");
+        registryConfig.setAddress(registryAddress);
 
         return registryConfig;
     }
@@ -31,8 +39,8 @@ public class DubboConfig {
     @Bean
     public ProtocolConfig dubboProtocolConfig() {
         ProtocolConfig protocolConfig = new ProtocolConfig();
-        protocolConfig.setName("dubbo");
-        protocolConfig.setPort(12345);
+        protocolConfig.setName(protocolName);
+        protocolConfig.setPort(protocolPort);
         protocolConfig.setThreads(200);
 
         return protocolConfig;
